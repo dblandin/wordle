@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'haml'
+require './lib/word_frequency_report'
 
 # Helpers
 require './lib/render_partial'
@@ -14,9 +15,14 @@ set :haml, {format: :html5}
 
 # Application routes
 get '/' do
-  haml :index, layout: :'layouts/application'
+  haml :index
 end
 
-get '/about' do
-  haml :about, layout: :'layouts/application'
+post '/analyze' do
+  @body       = params[:body]
+  report      = WordFrequencyReport.new(@body)
+  @results    = report.analyze
+  @word_count = report.word_count
+
+  haml :report
 end

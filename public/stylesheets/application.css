@@ -19,6 +19,11 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
+.wrapper {
+  margin: 20px auto 0 auto;
+  width: 80%;
+}
+
 html {
   line-height: 1;
 }
