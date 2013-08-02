@@ -19,8 +19,11 @@ get '/' do
 end
 
 post '/analyze' do
-  @body       = params[:body]
-  report      = WordFrequencyReport.new(@body)
+  @body           = params[:body]
+  @exclude_common = !!params[:exclude_common]
+
+  report = WordFrequencyReport.new(@body, exclude_common: @exclude_common)
+
   @results    = report.analyze
   @word_count = report.word_count
 

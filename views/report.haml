@@ -1,8 +1,14 @@
 %h2 Analyze Word Frequencies
 
-%form{ action: '/analyze', method: 'post'}
-  %textarea{rows: 10, cols: 50, name: 'body'}= @body
-  %input{type: 'submit'}
+%form{ action: '/analyze', method: 'post' }
+  %textarea{ rows: 10, cols: 50, name: 'body' }= @body
+  %br
+  %label{ for: 'exclude_common' }
+    Exclude common
+    %a{ href: 'https://en.wikipedia.org/wiki/Most_common_words_in_English', target: '_blank' } prepositions and other words
+  %input{ type: 'checkbox', name: 'exclude_common', value: 'true', checked: @exclude_common }
+
+  %input{ type: 'submit' }
 
 - results = ''
 - @results.each do |word|
@@ -10,4 +16,4 @@
 
 %h2 Results
 %p= "Total words: #{@word_count}"
-%textarea{rows: 10, cols: 50}= results
+%textarea{ rows: 10, cols: 50 }= results
